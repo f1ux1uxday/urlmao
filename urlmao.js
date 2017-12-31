@@ -7,11 +7,14 @@ const app = express()
 app.disable('x-powered-by')
 app.use(cors())
 app.use(express.static(__dirname + '/static'))
+
 app.get('/:urlParam(*)', (request, response) => {
 
   let urlParam = request.params.urlParam
 
-  response.send(urlParam)
+  response.json({
+    url: urlParam,
+  })
 })
 
 
