@@ -12,13 +12,24 @@
         URLMAO!
       </h1>
       <h3>
-        A URL SHORTENER AND OBFUSCATOR
+        HAHA URL SHORTENER AND OBFUSCATOR
       </h3>
     </header>
     <div>
-      <input placeholder='Your URL Here'></input>
-      <a>SHORTEN IT, LOL</a>
+      <input id='url-input' onchange='getURL()' placeholder='Your URL Here'>
+      </input>
+      <a id='url-submit'>SHORTEN IT, LOL</a>
     </div>
+
+    <script>
+
+      let getURL = () => {
+        let url = document.getElementById('url-input').value
+        let a = document.getElementById('url-submit')
+        a.href = 'http://localhost:8080/' + url
+      }
+
+    </script>
   </body>
 
 </html>
