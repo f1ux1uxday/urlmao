@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const nofavicon = require('express-no-favicons')
+const shortener = require('./shortener')
 
 const app = express()
 
