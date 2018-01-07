@@ -5,6 +5,9 @@
   "main": "urlmao.js",
   "author": "Lucas Dayton",
   "license": "MIT",
+  "scripts": {
+    "start": "node urlmao.js"
+  },
   "dependencies": {
     "cors": "^2.8.4",
     "express": "^4.16.2",
