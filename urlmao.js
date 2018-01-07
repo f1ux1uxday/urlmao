@@ -16,14 +16,12 @@ mongoose.connect(
   process.env.MONGODB_URI || 'mongodb://localhost/urlBank'
 )
 
-app.get('/:urlParam(*)', (request, response) => {
+app.get('/url/:urlParam(*)', (request, response) => {
   let urlParam = request.params.urlParam
   console.log(urlParam)
-
   let urlRegEx = /[A-Za-z]+[://]+[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&;\?#/.=]+/g
 
   if (urlRegEx.test(urlParam)) {
-
     let shortRandomNum = Math.floor(Math.random() * 10000).toString()
     let lmao = new Shortener({
       url: urlParam,
@@ -39,26 +37,41 @@ app.get('/:urlParam(*)', (request, response) => {
     })
 
     if (urlStatus = 200) {
-
+      // Save to db.urlBank if passed URL returns status 200
       lmao.save((error) => {
         if (error) {
           response.send('Unable to write to collection')
         }
       })
-
       console.log('pass')
       response.json({lmao})
     }
-
   } else {
-    urlParam = 'unfunny url: http(s):// prefix required. check url and retry.'
+    // If passed URL does not satisfy regEx, return error message.
+    urlParam = 'unfunny url. http(s):// prefix required. check url and retry.'
     console.log('invalid url')
 
     response.json({
       url: urlParam,
     })
   }
+})
 
+app.get('/lol/:urlToForward', (request, response) => {
+  let shortenedURL = request.params.urlToForward
+  let shortRegEx = new RegExp('^(http|https)://', 'i')
+
+  Shortener.findOne({urlmao: shortenedURL}, (err, lmao) => {
+    let originalUrl = lmao.url
+    if (err) {
+      response.send('Unable to access database LOL')
+    }
+    if (shortRegEx.test(originalUrl)) {
+      response.redirect(301, lmao.url)
+    } else {
+      response.redirect(301, 'http://' + lmao.url)
+    }
+  })
 })
 
 
