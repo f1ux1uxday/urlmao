@@ -25,7 +25,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
     let shortRandomNum = Math.floor(Math.random() * 10000).toString()
     let lmao = new Shortener({
       url: urlParam,
-      urlmao: shortRandomNum,
+      urlmao: 'ur-lmao.herokuapp.com/lol/' + shortRandomNum,
     })
     let urlStatus = 0
 
