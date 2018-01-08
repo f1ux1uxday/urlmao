@@ -68,9 +68,9 @@ app.get('/lol/:urlToForward', (request, response) => {
       response.send('Unable to access database LOL')
     }
     if (shortRegEx.test(originalUrl)) {
-      response.redirect(302, lmao.url)
+      response.redirect(lmao.url)
     } else {
-      response.redirect(302, 'http://' + lmao.url)
+      response.redirect('http://' + lmao.url)
     }
   })
 })
