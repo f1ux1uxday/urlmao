@@ -59,21 +59,19 @@ app.get('/url/:urlParam(*)', (request, response) => {
 })
 
 app.get('/lol/:shortUrl', (request, response) => {
-  let shortURL = request.params.shortUrl
-  let shortRegEx = new RegExp('^(http|https)://', 'i')
+  let shortUrl = request.params.shortUrl
+  // let shortRegEx = new RegExp('^(http|https)://', 'i')
 
-  Shortener.findOne({urlmao: shortURL}, (err, data) => {
+  Shortener.findOne({
+    urlmao: 'ur-lmao.herokuapp.com/lol/' + shortUrl,
+  }, (err, data) => {
     let originalUrl = data.url
     if (err) {
       console.log('error')
       response.send('Unable to access database LOL')
-    }
-    if (shortRegEx.test(originalUrl)) {
-      console.log('redirecting...')
-      response.redirect(data.url)
     } else {
-      console.log('redirect:')
-      response.redirect('http://' + data.url)
+      console.log('redirecting...')
+      response.redirect(301, data.url)
     }
   })
 })
