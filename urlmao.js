@@ -13,7 +13,9 @@ app.use(express.static(__dirname + '/static'))
 // '/' returns 'static/index.html'
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://heroku_x7hcc5zd:39c8i70697o7qrpjn4rd6kslch@ds123371.mlab.com:23371/heroku_x7hcc5zd')
+  process.env.MONGODB_URI ||
+  'mongodb://heroku_x7hcc5zd:39c8i70697o7qrpjn4rd6kslch@ds123371.mlab.com:23371/heroku_x7hcc5zd'
+)
 
 app.get('/url/:urlParam(*)', (request, response) => {
   let urlParam = request.params.urlParam
