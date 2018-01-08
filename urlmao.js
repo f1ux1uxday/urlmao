@@ -58,19 +58,22 @@ app.get('/url/:urlParam(*)', (request, response) => {
   }
 })
 
-app.get('/lol/:urlToForward', (request, response) => {
-  let shortenedURL = request.params.urlToForward
+app.get('/lol/:shortUrl', (request, response) => {
+  let shortURL = request.params.shortUrl
   let shortRegEx = new RegExp('^(http|https)://', 'i')
 
-  Shortener.findOne({urlmao: shortenedURL}, (err, lmao) => {
-    let originalUrl = lmao.url
+  Shortener.findOne({urlmao: shortURL}, (err, data) => {
+    let originalUrl = data.url
     if (err) {
+      console.log('error')
       response.send('Unable to access database LOL')
     }
     if (shortRegEx.test(originalUrl)) {
-      response.redirect(lmao.url)
+      console.log('redirecting...')
+      response.redirect(data.url)
     } else {
-      response.redirect('http://' + lmao.url)
+      console.log('redirect:')
+      response.redirect('http://' + data.url)
     }
   })
 })
