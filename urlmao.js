@@ -10,7 +10,7 @@ app.disable('x-powered-by')
 app.use(cors())
 app.use(nofavicon())
 app.use(express.static(__dirname + '/static'))
-// '/' returns 'static/index.html'
+// Returns 'static/index.html' at '/' route
 
 mongoose.connect(
   process.env.MONGODB_URI ||
@@ -19,7 +19,6 @@ mongoose.connect(
 
 app.get('/url/:urlParam(*)', (request, response) => {
   let urlParam = request.params.urlParam
-  console.log(urlParam)
   let urlRegEx = /[A-Za-z]+[://]+[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&;\?#/.=]+/g
 
   if (urlRegEx.test(urlParam)) {
@@ -60,12 +59,10 @@ app.get('/url/:urlParam(*)', (request, response) => {
 
 app.get('/lol/:shortUrl', (request, response) => {
   let shortUrl = request.params.shortUrl
-  // let shortRegEx = new RegExp('^(http|https)://', 'i')
 
   Shortener.findOne({
     urlmao: 'ur-lmao.herokuapp.com/lol/' + shortUrl,
   }, (err, data) => {
-    let originalUrl = data.url
     if (err) {
       console.log('error')
       response.send('Unable to access database LOL')
@@ -75,7 +72,6 @@ app.get('/lol/:shortUrl', (request, response) => {
     }
   })
 })
-
 
 app.listen(process.env.PORT || 8080, () => {
   console.log('live connection')
