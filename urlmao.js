@@ -19,7 +19,7 @@ mongoose.connect(
 
 app.get('/url/:urlParam(*)', (request, response) => {
   let urlParam = request.params.urlParam
-  let urlRegEx = /[A-Za-z]+[://]+[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&;\?#/.=]+/g
+  let urlRegEx = /[A-Za-z]+[://]+[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&;?#/.=]+/g
 
   if (urlRegEx.test(urlParam)) {
     let shortRandomNum = Math.floor(Math.random() * 10000).toString()
@@ -36,7 +36,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
       res.end
     })
 
-    if (urlStatus = 200) {
+    if (urlStatus === 200) {
       // Save to db.urlBank if passed URL returns status 200
       lmao.save((error) => {
         if (error) {
