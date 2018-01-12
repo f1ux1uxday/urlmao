@@ -31,8 +31,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
 
     // Request header from passed URL to verify legitimacy
     // Grab statusCode and end request.
-      app.head(urlParam, (req, res) => {
-      res.end()
+    app.head(urlParam, (req, res) => {
       if (res.statusCode == 200) {
         let urlStatus = res.statusCode
         if (urlStatus == 200) {
@@ -46,6 +45,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
           response.json({lmao})
         }
       }
+      res.end()
     })
 
     // Move this into the head request above?
