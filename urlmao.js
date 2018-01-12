@@ -33,9 +33,9 @@ app.get('/url/:urlParam(*)', (request, response) => {
     // Grab statusCode and end request.
       app.head(urlParam, (req, res) => {
       res.end()
-      if (res.statusCode === 200) {
+      if (res.statusCode == 200) {
         let urlStatus = res.statusCode
-        if (urlStatus === 200) {
+        if (urlStatus == 200) {
         // Save to db.urlBank if passed URL returns status 200
           lmao.save((error) => {
             if (error) {
