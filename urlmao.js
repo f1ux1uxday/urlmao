@@ -69,7 +69,7 @@ app.get('/lol/:shortUrl', (request, response) => {
       response.send('Unable to access database LOL')
     } else {
       console.log('redirecting...')
-      response.redirect(301, data.url)
+      response.redirect(data.url)
     }
   })
 })
