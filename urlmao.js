@@ -27,13 +27,13 @@ app.get('/url/:urlParam(*)', (request, response) => {
       url: urlParam,
       urlmao: 'ur-lmao.herokuapp.com/lol/' + shortRandomNum,
     })
-    let urlStatus = 0
+    // let urlStatus = 0
 
     // Request header from passed URL to verify legitimacy
     // Grab statusCode and end request.
     app.head(urlParam, (req, res) => {
       res.on('finish', () => {
-        urlStatus = res.statusCode
+        let urlStatus = res.statusCode
         if (urlStatus === 200) {
         // Save to db.urlBank if passed URL returns status 200
           lmao.save((error) => {
