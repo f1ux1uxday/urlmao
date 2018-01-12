@@ -31,7 +31,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
 
     // Request header from passed URL to verify legitimacy
     // Grab statusCode and end request.
-    app.get(urlParam, (req, res) => {
+    app.head(urlParam, (req, res) => {
       if (res.statusCode === 200) {
         let urlStatus = res.statusCode
         if (urlStatus === 200) {
