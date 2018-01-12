@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const nofavicon = require('express-no-favicons')
 const Shortener = require('./shortener')
-
 const app = express()
 
 app.disable('x-powered-by')
@@ -27,14 +26,13 @@ app.get('/url/:urlParam(*)', (request, response) => {
       url: urlParam,
       urlmao: 'ur-lmao.herokuapp.com/lol/' + shortRandomNum,
     })
-    let urlStatus = 0
 
     // Request header from passed URL to verify legitimacy
-    // Grab statusCode and end request.
+    // Check statusCode and end request.
     app.head(urlParam, (req, res) => {
       let end = res.end
-
-      res.end  = () => {
+      // Override standard res.end function with custom function
+      res.end = () => {
         if(res.statusCode == 200){
           lmao.save((error) => {
             if (error) {
