@@ -38,7 +38,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
     })
 
     // Move this into the head request above?
-    if (urlStatus = 200) {
+    if (urlStatus == 200) {
       // Save to db.urlBank if passed URL returns status 200
       lmao.save((error) => {
         if (error) {
