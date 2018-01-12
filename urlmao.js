@@ -32,20 +32,32 @@ app.get('/url/:urlParam(*)', (request, response) => {
     // Request header from passed URL to verify legitimacy
     // Grab statusCode and end request.
     app.head(urlParam, (req, res) => {
-      urlStatus = res.statusCode
-      res.end
-    })
-
-    if (urlStatus = 200) {
-      // Save to db.urlBank if passed URL returns status 200
-      lmao.save((error) => {
-        if (error) {
-          response.send('Unable to write to collection')
+      res.on('finish', () => {
+        urlStatus = res.statusCode
+        if (urlStatus === 200) {
+        // Save to db.urlBank if passed URL returns status 200
+          lmao.save((error) => {
+            if (error) {
+              response.send('Unable to write to collection')
+            }
+          })
+          console.log('pass')
+          response.json({lmao})
         }
       })
-      console.log('pass')
-      response.json({lmao})
-    }
+    })
+
+    // Move this into the head request above?
+    // if (urlStatus === 200) {
+      // // Save to db.urlBank if passed URL returns status 200
+      // lmao.save((error) => {
+        // if (error) {
+          // response.send('Unable to write to collection')
+        // }
+      // })
+      // console.log('pass')
+      // response.json({lmao})
+    // }
   } else {
     // If passed URL does not satisfy regEx, return error message.
     urlParam = 'unfunny url. http(s):// prefix required. check url and retry.'
