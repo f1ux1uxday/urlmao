@@ -32,13 +32,13 @@ app.get('/url/:urlParam(*)', (request, response) => {
     // Request header from passed URL to verify legitimacy
     // Grab statusCode and end request.
     app.head(urlParam, (req, res) => {
-      urlStatus = res.statusCode
+      urlStatus = res.status
       console.dir(res)
-      res.end()
+      // res.end()
     })
 
     // Move this into the head request above?
-    if (urlStatus = 200) {
+    if (urlStatus == 200) {
       // Save to db.urlBank if passed URL returns status 200
       lmao.save((error) => {
         if (error) {
