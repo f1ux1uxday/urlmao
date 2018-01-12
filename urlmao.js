@@ -33,12 +33,12 @@ app.get('/url/:urlParam(*)', (request, response) => {
     // Grab statusCode and end request.
     app.head(urlParam, (req, res) => {
       urlStatus = res.status
-      console.dir(res)
+      console.log(urlStatus)
       // res.end()
     })
 
     // Move this into the head request above?
-    if (urlStatus == '200 OK') {
+    if (urlStatus = 200) {
       // Save to db.urlBank if passed URL returns status 200
       lmao.save((error) => {
         if (error) {
