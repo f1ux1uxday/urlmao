@@ -35,19 +35,35 @@ app.get('/url/:urlParam(*)', (request, response) => {
       urlStatus = res.status
       console.log(urlStatus)
       // res.end()
+      let end = res.end
+
+      res.end  = () => {
+        if(res.statusCode == 200){
+          lmao.save((error) => {
+            if (error) {
+              response.send('Unable to write to collection')
+            }
+          })
+          console.log('pass')
+          response.json({lmao})
+        }
+      }
+
+      res.end = end
+      res.end()
     })
 
     // Move this into the head request above?
-    if (urlStatus = 200) {
-      // Save to db.urlBank if passed URL returns status 200
-      lmao.save((error) => {
-        if (error) {
-          response.send('Unable to write to collection')
-        }
-      })
-      console.log('pass')
-      response.json({lmao})
-    }
+    // if (urlStatus = 200) {
+      // // Save to db.urlBank if passed URL returns status 200
+      // lmao.save((error) => {
+        // if (error) {
+          // response.send('Unable to write to collection')
+        // }
+      // })
+      // console.log('pass')
+      // response.json({lmao})
+    // }
   } else {
     // If passed URL does not satisfy regEx, return error message.
     urlParam = 'unfunny url. http(s):// prefix required. check url and retry.'
