@@ -32,19 +32,17 @@ app.get('/url/:urlParam(*)', (request, response) => {
     // Request header from passed URL to verify legitimacy
     // Grab statusCode and end request.
     app.head(urlParam, (req, res) => {
-      res.on('finish', () => {
-        let urlStatus = res.statusCode
-        if (urlStatus === 200) {
-        // Save to db.urlBank if passed URL returns status 200
-          lmao.save((error) => {
-            if (error) {
-              response.send('Unable to write to collection')
-            }
-          })
-          console.log('pass')
-          response.json({lmao})
-        }
-      })
+      let urlStatus = res.statusCode
+      if (urlStatus === 200) {
+      // Save to db.urlBank if passed URL returns status 200
+        lmao.save((error) => {
+          if (error) {
+            response.send('Unable to write to collection')
+          }
+        })
+        console.log('pass')
+        response.json({lmao})
+      }
     })
 
     // Move this into the head request above?
