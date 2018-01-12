@@ -33,6 +33,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
     // Grab statusCode and end request.
     app.head(urlParam, (req, res) => {
       urlStatus = res.statusCode
+      console.log(res)
       res.end
     })
 
