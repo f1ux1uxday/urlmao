@@ -34,7 +34,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
     app.head(urlParam, (req, res) => {
       urlStatus = res.statusCode
       console.log(res)
-      res.end
+      res.end()
     })
 
     // Move this into the head request above?
