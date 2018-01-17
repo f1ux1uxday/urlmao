@@ -44,7 +44,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
         }
       }
 
-      res.end = end
+      //res.end = end
       res.end()
     })
   } else {
@@ -69,7 +69,7 @@ app.get('/lol/:shortUrl', (request, response) => {
       response.send('Unable to access database LOL')
     } else {
       console.log('redirecting...')
-      response.redirect(data.url)
+      response.redirect(301, data.url)
     }
   })
 })
