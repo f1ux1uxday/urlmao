@@ -18,9 +18,9 @@ mongoose.connect(
 
 app.get('/url/:urlParam(*)', (request, response) => {
   let urlParam = request.params.urlParam
-  let urlRegEx = /[A-Za-z]+[://]+[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&;?#/.=]+/g
+  //let urlRegEx = /[A-Za-z]+[://]+[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&;?#/.=]+/g
 
-  if (urlRegEx.test(urlParam)) {
+  if (urlParam !== 0) {
     let shortRandomNum = Math.floor(Math.random() * 10000).toString()
     let lmao = new Shortener({
       url: urlParam,
@@ -33,7 +33,7 @@ app.get('/url/:urlParam(*)', (request, response) => {
       let end = res.end
       // Override standard res.end function with custom function
       res.end = () => {
-        if(res.statusCode == 200){
+        if (res.statusCode == 200) {
           lmao.save((error) => {
             if (error) {
               response.send('Unable to write to collection')
