@@ -13,8 +13,7 @@ app.use(express.static(__dirname + '/static'))
 // Returns 'static/index.html' at '/' route
 
 mongoose.connect(
-  process.env.MONGODB_URI ||
-  'mongodb://heroku_x7hcc5zd:39c8i70697o7qrpjn4rd6kslch@ds123371.mlab.com:23371/heroku_x7hcc5zd'
+  process.env.MONGODB_URI || 'mongodb://heroku_x7hcc5zd:39c8i70697o7qrpjn4rd6kslch@ds123371.mlab.com:23371/heroku_x7hcc5zd'
 )
 
 app.get('/url/:urlParam(*)', (request, response) => {
@@ -28,11 +27,9 @@ app.get('/url/:urlParam(*)', (request, response) => {
       urlmao: 'ur-lmao.herokuapp.com/lol/' + shortRandomNum,
       // urlmao: 'localhost:8080/lol/' + shortRandomNum,
     })
-
     // Request header from passed URL to verify legitimacy
     // Check statusCode and end request.
     reQuest(urlParam, (err, res) => {
-
       if (res.statusCode == 200) {
         lmao.save((error) => {
           if (error) {
@@ -47,7 +44,6 @@ app.get('/url/:urlParam(*)', (request, response) => {
     // If passed URL does not satisfy regEx, return error message.
     urlParam = 'unfunny url. check url and try again.'
     console.log('invalid url')
-
     response.json({
       url: urlParam,
     })
