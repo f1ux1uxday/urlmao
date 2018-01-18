@@ -33,15 +33,15 @@ app.get('/url/:urlParam(*)', (request, response) => {
     // Check statusCode and end request.
     reQuest(urlParam, (err, res) => {
 
-        if (res.statusCode == 200) {
-          lmao.save((error) => {
-            if (error) {
-              response.send('Unable to write to collection')
-            }
-          })
-          console.log('pass')
-          response.json({lmao})
-        }
+      if (res.statusCode == 200) {
+        lmao.save((error) => {
+          if (error) {
+            response.send('Unable to write to collection')
+          }
+        })
+        console.log('pass')
+        response.json({lmao})
+      }
     })
   } else {
     // If passed URL does not satisfy regEx, return error message.
@@ -65,7 +65,7 @@ app.get('/lol/:shortUrl', (request, response) => {
       response.send('Unable to access database LOL')
     } else {
       console.log('redirecting...')
-      response.redirect(data.url)
+      response.redirect(301, data.url)
     }
   })
 })
