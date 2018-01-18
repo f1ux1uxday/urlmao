@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const reQuest = require('request')
 const cors = require('cors')
 const nofavicon = require('express-no-favicons')
 const Shortener = require('./shortener')
@@ -25,15 +26,14 @@ app.get('/url/:urlParam(*)', (request, response) => {
     let lmao = new Shortener({
       url: urlParam,
       urlmao: 'ur-lmao.herokuapp.com/lol/' + shortRandomNum,
+      // urlmao: 'localhost:8080/lol/' + shortRandomNum,
     })
 
     // Request header from passed URL to verify legitimacy
     // Check statusCode and end request.
-    app.head(urlParam, (req, res) => {
-      let end = res.end
-      // Override standard res.end function with custom function
-      res.end = () => {
-        if(res.statusCode == 200){
+    reQuest(urlParam, (err, res) => {
+
+        if (res.statusCode == 200) {
           lmao.save((error) => {
             if (error) {
               response.send('Unable to write to collection')
@@ -42,14 +42,10 @@ app.get('/url/:urlParam(*)', (request, response) => {
           console.log('pass')
           response.json({lmao})
         }
-      }
-
-      res.end = end
-      res.end()
     })
   } else {
     // If passed URL does not satisfy regEx, return error message.
-    urlParam = 'unfunny url. http(s):// prefix required. check url and retry.'
+    urlParam = 'unfunny url. check url and try again.'
     console.log('invalid url')
 
     response.json({
