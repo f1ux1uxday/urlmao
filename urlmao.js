@@ -25,7 +25,6 @@ app.get('/url/:urlParam(*)', (request, response) => {
     let lmao = new Shortener({
       url: urlParam,
       urlmao: 'ur-lmao.herokuapp.com/lol/' + shortRandomNum,
-      // urlmao: 'localhost:8080/lol/' + shortRandomNum,
     })
     // Request header from passed URL to verify legitimacy
     // Check statusCode and end request.
