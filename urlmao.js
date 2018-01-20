@@ -19,7 +19,7 @@ mongoose.connect(
 app.get('/url/:urlParam(*)', (request, response) => {
   let urlParam = request.params.urlParam
   let urlRegEx = /[A-Za-z]+[://]+[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&;?#/.=]+/g
-
+  // Initial regex test to avoid sending header requests to clearly nonsensical addresses
   if (urlRegEx.test(urlParam)) {
     let shortRandomNum = Math.floor(Math.random() * 10000).toString()
     let lmao = new Shortener({

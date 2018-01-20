@@ -1,0 +1,64 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  font-family: 'Tauri', sans-serif;
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+h4 {
+  font-size: 75%;
+}
+
+header {
+  width: 100%;
+}
+
+input {
+  height: 150%;
+  width: 100%;
+}
+
+a, p {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+#url-submit {
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+  padding: 1%;
+}
+
+@media screen 
+and (max-width: 1024px)
+and (orientation: landscape) {
+  body {
+    font-size: 3.33rem;
+  }
+
+  header {
+    margin-top: -4%;
+  }
+}
+
+@media screen 
+and (min-width: 1024px)
+and (orientation: landscape) {
+  header {
+    margin-top: 5%;
+  }
+}
+
+@media screen
+and (orientation: portrait) {
+  body {
+    margin-top: 40%;
+  }
+}
+
